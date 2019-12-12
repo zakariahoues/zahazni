@@ -1,44 +1,26 @@
 <?php
   
-  include_once "C:/xampp/htdocs/zahazni/Core/categorieC.php";
-include "C:/xampp/htdocs/zahazni/entities/produit.php";
-  include_once "C:/xampp/htdocs/zahazni/Core/souscategorieC.php";
+  include_once "C:/xampp/htdocs/zahazni/Core/produitC.php";
+include_once "C:/xampp/htdocs/zahazni/Core/promotionC.php";
+if (isset($_GET['idprom']))
+{
+	$promoC=new promotionC();
+    $result=$promoC->recupererPromo($_GET['idprom']);
+	foreach($result as $row){
+		    $idprom=$row["idprom"];
+        $idProduit=$row["idProduit"];
+        $pourcentage=$row["pourcentage"];
+        $dateD=$row["dateD"];
+        $dateF=$row["dateF"];
+  }
+}
+      
+    ?>
 
-include "C:/xampp/htdocs/zahazni/Core/produitC.php";
-  
-
-
-if (isset($_GET['reference_p'])){
-    $produitC=new produitC();
-    $result=$produitC->recupererprod1($_GET['reference_p']);
-    foreach($result as $row){
- $reference_p=$row['reference_p'];
-        $nom_p=$row['nom_p'];
-        $description_p=$row['description_p'];
-         $couleur_p=$row['couleur_p'];
-        
-        $quantite_p=$row['quantite_p'];
-        $quantite_minimale_p=$row['quantite_minimale_p']; 
-        $nom_p=$row['prix_p'];
-        $prix_de_vente_p=$row['prix_de_vente_p'];
-        
-         $date_p=$row['date_p'];
-        $reference_sous_categorie=$row['reference_sous_categorie'];
-        
-         $nom_marque=$row['nom_marque'];
-        $image_p=$row['image_p'];
-         $matiere=$row['matiere'];
-        $etat=$row['etat'];
-        
-       
 ?>
 <?php
-$sous_categoriec = new sous_categorieC();
-$resultc = $sous_categoriec->affichersouscategorie();
-
 
 ?>
-
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -94,10 +76,7 @@ $resultc = $sous_categoriec->affichersouscategorie();
                         <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Acceuil </a>
                     </li>
                     <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
-               
-                    
-                    
-                    
+                     
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bars"></i>Rayon</a>
                         <ul class="sub-menu children dropdown-menu">
@@ -136,48 +115,14 @@ $resultc = $sous_categoriec->affichersouscategorie();
                             <li><i class="fa fa-table"></i><a href="afficherproduit.php">liste produit</a></li>
                         </ul>
                     </li>
-                    
-                    
-                    
-                    
-                    
-                    <h3 class="menu-title">Icons</h3><!-- /.menu-title -->
-
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Icons</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bars"></i>Promotion</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="font-fontawesome.html">Font Awesome</a></li>
-                            <li><i class="menu-icon ti-themify-logo"></i><a href="font-themify.html">Themefy Icons</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="ajoutproduit.php">Nouvelle Promo</a></li>
+                            <li><i class="fa fa-table"></i><a href="afficherproduit.php">Liste promo</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="widgets.html"> <i class="menu-icon ti-email"></i>Widgets </a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Charts</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-line-chart"></i><a href="charts-chartjs.html">Chart JS</a></li>
-                            <li><i class="menu-icon fa fa-area-chart"></i><a href="charts-flot.html">Flot Chart</a></li>
-                            <li><i class="menu-icon fa fa-pie-chart"></i><a href="charts-peity.html">Peity Chart</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>Maps</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-map-o"></i><a href="maps-gmap.html">Google Maps</a></li>
-                            <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Vector Maps</a></li>
-                        </ul>
-                    </li>
-                    <h3 class="menu-title">Extras</h3><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Login</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
-                            <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
-                        </ul>
-                    </li>
+                   
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -327,214 +272,79 @@ $resultc = $sous_categoriec->affichersouscategorie();
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="Acceuil.html">Acceuil</a></li>
-                            <li><a href="#">Produit</a></li>
-                            <li class="active">Nouveau Produit</li>
+                            <li><a href="#">Categorie</a></li>
+                            <li class="active">Nouvelle Categorie</li>
                         </ol>
                     </div>
                 </div>
             </div>
         </div>
-
+<form method="POST" action="ajoutPromotion.php">
         <div class="content mt-3">
             <div class="animated fadeIn">
-
                 <div class="row">
-<form method="POST" >
                     <div class="col-xs-6 col-sm-6">
                         <div class="card">
                             <div class="card-header">
                                 <strong>Formulaire</strong> <small> </small>
                             </div>
-                           
+                        
+
                             <div class="card-body card-block">
+                                                             
+
+                                    <div class="form-group">
+                                        <label class=" form-control-label">Date Debut</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-plus-square"></i></div>
+                                            <input id="dateD" type="date"  value="<?PHP echo $dateD; ?>"   name="dateD" required="required" class="form-control">
+                                        </div>
+                                        <small class="form-text text-muted"> </small>
+                                    </div>
+                                 <div class="form-group">
+                                        <label class=" form-control-label">Date Fin</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-plus-square"></i></div>
+                                            <input id="dateF" type="date"  value="<?PHP echo $dateF; ?>"   name="dateF" required="required" class="form-control">
+                                        </div>
+                                        <small class="form-text text-muted"> </small>
+                                    </div>
+                                 <div class="form-group">
+                                        <label class=" form-control-label">Reduction</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-plus-square"></i></div>
+                                            <input id="dateD" type="number"  value="<?PHP echo $pourcentage; ?>"  name="pourcentage" required="required" class="form-control">
+                                        </div>
+                                        <small class="form-text text-muted"> </small>
+                                    </div>
                                 
-                                <div class="form-group">
-                                    <label class=" form-control-label">Ref</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-plus-square"></i></div>
-                                        <input id="reference_p" name="reference_p" type="number" required="required" class="form-control" value="<?PhP echo $reference_p ?>">
+                                    <div class="form-group">
+                                        <label class=" form-control-label">Id Produit</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-plus-square"></i></div>
+                                            <input id="dateD" type="number"  value="<?PHP echo $idprom; ?>" name="idprom" required="required" class="form-control">
+                                        </div>
+                                        <small class="form-text text-muted"> </small>
                                     </div>
-                                    <small class="form-text text-muted"> </small>
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Nom</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-plus-square"></i></div>
-                                        <input id="nom_p" name="nom_p" required="required" type="text" class="form-control" value="<?PhP echo $nom_p ?>">
-                                    </div>
-                                    <small class="form-text text-muted"> </small>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Description</label></div>
-                                    <div class="col-12 col-md-9"><textarea value="<?PhP echo $despcriprion_p ?>"  id="description_p" name="description_p" rows="9" placeholder="Content..." class="form-control"></textarea></div>
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">couleur</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-plus-square"></i></div>
-                                        <input value="<?PhP echo $couleur_p?>" id="couleur_p" type="text" name="couleur_p" required="required" class="form-control">
-                                    </div>
-                                    <small class="form-text text-muted"> </small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class=" form-control-label">Quantite</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-plus-square"></i></div>
-                                        <input  id="quantite_p" value="<?PhP echo $quantite_p?>" name="quantite_p" type="number" required="required" class="form-control">
-                                    </div>
-                                    <small class="form-text text-muted"> </small>
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Quantite Minimale</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-plus-square"></i></div>
-                                        <input  id="quantite_minimale_p" value="<?PhP echo $quantite_minimale_p?>" type="number" name="quantite_minimale_p" required="required" class="form-control">
-                                    </div>
-                                    <small class="form-text text-muted"> </small>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label class=" form-control-label">Prix</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-                                        <input id="prix_p" value="<?PhP echo $prix_p?>" name="prix_p" required="required" type="number" class="form-control">
-                                    </div>
-                                    <small class="form-text text-muted"> </small>
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Prix De Vente</label>
-                                    <div class="input-group">
-                                        <div  class="input-group-addon"><i class="fa fa-usd"></i></div>
-                                        <input id="prix_de_vente_p" name="prix_de_vente_p" value="<?PhP echo $prix_de_vente_p?>" type="number" required="required" class="form-control">
-                                    </div>
-                                    <small class="form-text text-muted"> </small>
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Date input</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                        <input id="date_p" value="<?PhP echo $date_p?>" name="date_p" required="required" class="form-control" type="date">
-                                    </div>
-                                    <small class="form-text text-muted">ex. 99/99/9999</small>
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">marque</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                        <input id="nom_marque" value="<?PhP echo $nom_marque?>" name="nom_marque" required="required" class="form-control">
-                                    </div>
-                                    <small class="form-text text-muted">ex. 99/99/9999</small>
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Matiere</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                        <input id="matiere" name="matiere" value="<?PhP echo $matiere?>" required="required" class="form-control">
-                                    </div>
-                                    <small class="form-text text-muted">ex. 99/99/9999</small>
-                                </div>
+                                
+                                
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-xs-6 col-sm-6">
-                       
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">Reference sous categorie</strong>
-                            </div>
-                            <div class="card-body">
-
-                                 <select value="<?PhP echo $reference_sous_categorie?>" name="reference_sous_categorie" data-placeholder="Choose a Country..." class="standardSelect" tabindex="1">
-                                                <option value="undefined">non affecte</option>
-                                                <?php 
-foreach($resultc as $row)
-{
-  ?>
-                                                <option value="<?php echo $row['reference_sous_categorie']; ?>"><?php echo $row['nom_sous_categorie']; ?></option>
-
-
-                                                <?php 
-    
-}
-?>
-                                            </select>
-                            </div>
-                        </div>
-                       
-                        
-                        
-                         <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">Etat</strong>
-                            </div>
-                            <div class="card-body">
-
-                               <select name="etat" value="<?PhP echo $etat?>"  data-placeholder="Choose a Country..." class="standardSelect" tabindex="1">
-                                                <option value="undefined">non affecte</option>
-                                   
-                                                <option value="1">disponible</option>
-                                   
-                                                <option value="0">non disponible</option>
-
-
-
-  
-                                            </select>
-                            </div>
-                        </div>
-
-
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title"></strong>
-                            </div>
-                            <div class="card-body">
-
-
-
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="file-multiple-input" class=" form-control-label">Images</label></div>
-                                    <div class="col-12 col-md-9"><input  value="<?PhP echo $image_p?>"id="image_p" name="image_p" type="file" id="file-multiple-input" name="file-multiple-input" multiple="" class="form-control-file"></div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-
-                    </div>
-    <input type="hidden" name="reference_ini" value="<?PHP echo $_GET['reference_p'];?>">
-                
-                
-                
-           <button type="RESET" class="btn btn-primary">RESET</button>
-                      <button name="modifier" value="modifier" type="submit"  class="btn btn-success">Modifier</button>
-                    </form>
+                   
+                   
+                    
                 </div>
+                 <button type="RESET" class="btn btn-primary">RESET</button>
+                    <button id="send" type="submit" value="ajout" name="ajouter" class="btn btn-success">VALIDER</button>
+               < input type="submit" name="ajouter" value="ajout">
             </div><!-- .animated -->
         </div><!-- .content -->
-
+</form>
     </div><!-- /#right-panel -->
 
     <!-- Right Panel -->
-<?PHP
-    }
-}
-if (isset($_POST['modifier'])){
-    $produit=new produit($_POST['reference_p'],$_POST['nom_p'],$_POST['description_p'],$_POST['couleur_p'],$_POST['quantite_p'],$_POST['quantite_minimale_p'],$_POST['prix_p'],$_POST['prix_de_vente_p'],$_POST['date_p'],$_POST['reference_sous_categorie'],$_POST['nom_marque'],$_POST['image_p'],$_POST['matiere'],$_POST['etat']);
-    $produitC->modifierproduit($produit,$_POST['reference_ini']);
-    echo $_POST['reference_ini'];
-    echo '<script language="Javascript">
-           <!--
-                // -->
-     </script>';
-}
-?>
+
 
     <script src="vendors/jquery/dist/jquery.min.js"></script>
     <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
@@ -550,7 +360,6 @@ if (isset($_POST['modifier'])){
                 width: "100%"
             });
         });
-
     </script>
 
 </body>

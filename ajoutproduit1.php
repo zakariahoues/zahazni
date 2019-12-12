@@ -8,7 +8,7 @@ include "C:/xampp/htdocs/zahazni/Entities/produit.php";
 include "C:/xampp/htdocs/zahazni/Entities/categorie.php";
 include "C:/xampp/htdocs/zahazni/Entities/souscategorie.php";
 
-    if(isset($_POST['reference_p'])      )
+    if(isset($_POST['reference_p']) and      )
 
   {
          echo "ajouter";
